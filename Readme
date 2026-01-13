@@ -1,0 +1,284 @@
+# ORCA_TOP – Physical Design Project (RTL-to-GDSII)
+
+## About the Project
+
+This repository documents the complete Physical Design implementation of the ORCA_TOP block using Synopsys EDA tools in 28nm technology.  
+The objective of this project is to demonstrate an industry-level backend flow starting from design import up to final sign-off verification.
+
+This project was carried out as part of professional VLSI training and follows standard ASIC Physical Design methodology used in semiconductor companies.
+
+---
+
+## Block Summary
+
+- Block Name: ORCA_TOP  
+- Technology Node: 28nm  
+- Operating Frequency: 435 MHz  
+- Standard Cell Count: ~60,000  
+- Macro Count: 40  
+- Power Domains: Multi-voltage  
+- Flow Type: Full RTL-to-GDSII  
+- Tools Used: Synopsys Design Compiler, ICC2, PrimeTime, StarRC  
+
+---
+
+## Tools and Environment
+
+- Synthesis Tool: Synopsys Design Compiler  
+- Place and Route: Synopsys ICC2  
+- Timing Analysis: Synopsys PrimeTime  
+- RC Extraction: Synopsys StarRC  
+- Scripting Language: TCL  
+- Operating System: Linux  
+
+---
+
+# Complete Physical Design Flow
+
+---
+
+## 1. Design Import
+
+The Physical Design flow starts by importing the synthesized gate-level netlist and timing constraints into ICC2.
+
+Activities performed:
+- Read gate-level netlist generated from Design Compiler  
+- Read SDC timing constraints  
+- Load technology files and standard cell libraries  
+- Create design database (NDM)  
+- Perform initial design checks  
+
+Checks performed:
+- Unconnected ports check  
+- Missing library cell check  
+- Unresolved reference check  
+
+Goal:
+Ensure clean design database before floorplanning.
+
+---
+
+## 2. Floorplanning
+
+Objective:  
+Define chip core size and optimize macro placement.
+
+Tasks performed:
+- Set core utilization and aspect ratio  
+- Determine die size based on design requirement  
+- Place macros based on connectivity using fly-line analysis  
+- Create routing channels between macros  
+- Define blockages for placement and routing  
+- Create voltage areas for multi-power domains  
+
+Optimization:
+- Multiple iterations of floorplan to reduce congestion  
+- Improved routability  
+- Balanced macro distribution  
+
+---
+
+## 3. Power Planning
+
+Objective:  
+Build a reliable power distribution network.
+
+Implementation:
+- Created power rings around the core  
+- Inserted horizontal and vertical power straps  
+- Connected standard cells to power grid  
+- Implemented multi-voltage power domains  
+- Added power switches for voltage islands  
+
+Verification:
+- IR drop analysis  
+- EM rule checks  
+
+---
+
+## 4. Placement
+
+Objective:  
+Place standard cells optimally with timing and congestion awareness.
+
+Steps:
+- Initial placement  
+- Congestion-driven optimization  
+- Timing-driven optimization  
+- Cell legalization  
+
+Results:
+- Reduced congestion  
+- Improved critical timing paths  
+- Balanced cell density across core  
+
+---
+
+## 5. Clock Tree Synthesis (CTS)
+
+Objective:  
+Build a balanced clock distribution network.
+
+CTS activities:
+- Insertion of clock buffers  
+- Skew optimization  
+- Insertion delay control  
+- Shielding for critical clock nets  
+
+Results:
+- Achieved low skew  
+- Controlled insertion delay  
+- Stable clock tree  
+
+---
+
+## 6. Routing
+
+Objective:  
+Complete signal routing with DRC clean design.
+
+Stages:
+- Global routing  
+- Detailed routing  
+- DRC fixing  
+
+Fixes applied:
+- Shorts  
+- Opens  
+- Spacing violations  
+
+---
+
+## 7. Static Timing Analysis (STA)
+
+Tool Used: Synopsys PrimeTime
+
+Analysis performed:
+- Setup timing analysis  
+- Hold timing analysis  
+- Multi-corner analysis (Cmin, Cmax)  
+- OCV and AOCV analysis  
+
+Timing fixes:
+- Buffer insertion  
+- VT swapping  
+- Driver upsizing  
+- Path restructuring  
+
+Outcome:
+- Positive setup slack achieved  
+- Hold violations fixed  
+- No critical timing paths remaining  
+
+---
+
+## 8. RC Extraction
+
+Tool Used: Synopsys StarRC
+
+Activities:
+- Generated SPEF files  
+- Used nxtgrd and TLU+ files  
+- Extracted parasitics for Cmin and Cmax corners  
+
+---
+
+## 9. Sign-Off Verification
+
+Final checks:
+- DRC clean  
+- LVS clean  
+- IR drop verified  
+- Power analysis verified  
+- Final timing closure achieved  
+
+Deliverables:
+- Final GDS  
+- Sign-off reports  
+
+---
+
+## TCL Automation
+
+Automation scripts developed for:
+- Design import  
+- Floorplan creation  
+- Voltage area generation  
+- CTS setup  
+- Timing ECO fixes  
+- Automated report generation  
+
+This helped reduce manual effort and improve productivity.
+
+---
+
+## Results and Metrics
+
+- Target Frequency: 435 MHz  
+- Setup Slack: Positive  
+- Hold Slack: Clean  
+- DRC Status: Clean  
+- LVS Status: Clean  
+- Power: Within limits  
+
+---
+
+## Key Achievements
+
+- Completed full RTL-to-GDSII flow  
+- Achieved timing closure at 435 MHz  
+- Reduced timing violations using optimization techniques  
+- Automated PD tasks using TCL scripting  
+- Gained real-time industry flow experience  
+- Successfully handled multi-voltage design  
+
+---
+
+## Learning Outcomes
+
+- Complete understanding of Physical Design flow  
+- Timing closure techniques  
+- Multi-voltage design concepts  
+- Tool usage (ICC2, PrimeTime, StarRC)  
+- Debugging real design issues  
+- Industry sign-off methodology  
+
+---
+
+## Repository Content
+
+This repository contains:
+- TCL scripts for automation  
+- Timing and power reports  
+- ICC2 screenshots  
+- Project documentation  
+
+---
+
+## Disclaimer
+
+This repository is created only for educational and demonstration purposes.  
+No proprietary PDK, licensed files, or confidential data are shared.
+
+---
+
+## Author
+
+Abhishek S Madalli  
+Email: abhishek.madalli22@gmail.com  
+LinkedIn: https://linkedin.com/in/abhishek-s-madalli-5234582b8  
+Portfolio: https://abhisheksmadalli-protfolio.lovable.app  
+
+---
+
+## Contact
+
+Feel free to connect with me for:
+- VLSI backend roles  
+- Physical design discussions  
+- Project collaboration  
+- Tool flow guidance  
+
+---
+
+⭐ If you like this project, please give it a star!
